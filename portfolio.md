@@ -1,4 +1,4 @@
-# Digital portfolio Embedded systems Y1 P3
+# Digital portfolio Professional Skills Y1 P3
 - Name: Peter Kapsiar
 - Student ID: 5486866
 - Repository: https://github.com/pop9459/P3-ProfessionalSkills
