@@ -11,6 +11,7 @@ This repository aggregates multiple project repositories using Git subtrees.
 - [Computer Science Portfolio](P3-ComputerScience/portfolio.md)
 - [Embedded Systems Portfolio](P3-EmbeddedSystems/portfolio.md)
 - [AutomaticCourtainBlinder Portfolio](AutomaticCourtainBlinder/portfolio.md)
+- [Professional Skills Portfolio](P3-ProfessionalSkills/portfolio.md)
 - [Combined Portfolio](PORTFOLIO.md)
 
 ## Updating the Combined Portfolio
@@ -62,9 +63,13 @@ git subtree add --prefix PROJECT_NAME GITHUB_URL BRANCH --squash
 git subtree add --prefix MyNewProject https://github.com/username/my-new-project main --squash
 ```
 
-### 2. Update "Included Projects" section
+### 2. Update "Quick Links" section
 
-Add the new project folder name to the list in the "Included Projects" section at the top of this README.
+Add a new bullet point for the new project in the "Quick Links" section of this README:
+
+```markdown
+- [My New Project Portfolio](PROJECT_NAME/portfolio.md)
+```
 
 ### 3. Update pull command
 
