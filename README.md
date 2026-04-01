@@ -1,4 +1,4 @@
-# NHL Stenden Computer Science P3 Portfolio
+# NHL Stenden Computer Science Y1 P3 Portfolio
 
 This repository aggregates multiple project repositories using Git subtrees.
 
