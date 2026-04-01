@@ -205,7 +205,7 @@ def build_combined_markdown(root_dir: Path) -> str:
     content_markdown = "\n".join(content_lines).strip()
     toc_lines = build_table_of_contents(content_markdown)
 
-    merged_lines = intro_lines + toc_lines + ["---", "", content_markdown, ""]
+    merged_lines = intro_lines + toc_lines + [content_markdown, ""]
     return "\n".join(merged_lines).rstrip() + "\n"
 
 
