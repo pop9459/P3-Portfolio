@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance tracker</title>
+</head>
+<body>
+    <h1>Attendance tracker</h1>
+    <input type="text" id="name" placeholder="Enter name">
+    <button onclick="registerCard()">Register card</button>
+
+    <h2 id="today">Today's date</h2>
+    <h2>Cards and today's attendance</h2>
+    <table id="attendance-records" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>UID</th>
+                <th>Check in</th>
+                <th>Check out</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    <button id="ClearDbButton">Clear DB</button>
+    <script>
+        const ATTENDANCE_REFRESH_INTERVAL_MS = 3000;
+        let attendanceFetchInProgress = false;
+
+        function formatTodayLabel() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            document.getElementById('today').textContent = `Today's date: ${day}.${month}.${year}`;
+        }
+
+        async function fetchJson(url, method = 'GET', body = null) {
+            const options = { method };
+            if (body !== null) {
+                options.headers = { 'Content-Type': 'application/json' };
+                options.body = JSON.stringify(body);
+            }
+
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`Request failed: ${response.status}`);
+            }
+
+            return response.json();
+        }
+
+        async function registerCard() {
+            try {
+                const name = document.getElementById('name').value.trim();
+                const data = await fetchJson('/registerCard', 'POST', { name });
+                await fetchAttendanceRecords();
+                alert(data.message);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function clearDatabase() {
+            const confirmed = window.confirm('Clear all attendance and registered cards?');
+            if (!confirmed) {
+                return;
+            }
+
+            try {
+                const data = await fetchJson('/clearDatabase', 'POST');
+                await fetchAttendanceRecords();
+                alert(data.message || 'Database cleared successfully');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to clear database');
+            }
+        }
+
+        async function fetchRegisteredCards() {
+            try {
+                const data = await fetchJson('/registeredCards', 'GET');
+                // Backend returns known cards as an object map: { uid: name }.
+                const cards = Array.isArray(data)
+                    ? data
+                    : Object.entries(data).map(([uid, name]) => ({ uid, name }));
+
+                return cards;
+            } catch (error) {
+                console.error('Error:', error);
+                return [];
+            }
+        }
+
+        async function fetchAttendanceRecords() {
+            if (attendanceFetchInProgress) {
+                return;
+            }
+
+            attendanceFetchInProgress = true;
+            try {
+                const [records, cards] = await Promise.all([
+                    fetchJson('/attendanceRecords', 'GET'),
+                    fetchRegisteredCards()
+                ]);
+                const nameByUid = cards.reduce((acc, card) => {
+                    acc[card.uid] = card.name;
+                    return acc;
+                }, {});
+
+                const table = document.getElementById('attendance-records');
+                const tableBody = table.querySelector('tbody');
+                tableBody.innerHTML = '';
+
+                const rows = cards.map(card => {
+                    const times = (records && records[card.uid]) ? records[card.uid] : [];
+                    return {
+                        name: card.name,
+                        uid: card.uid,
+                        checkIn: times[0] || '-',
+                        checkOut: times[1] || '-'
+                    };
+                });
+
+                // Show scanned UIDs even if they no longer exist in known cards.
+                Object.entries(records || {}).forEach(([uid, times]) => {
+                    if (!nameByUid[uid]) {
+                        rows.push({
+                            name: 'Unknown',
+                            uid,
+                            checkIn: times[0] || '-',
+                            checkOut: times[1] || '-'
+                        });
+                    }
+                });
+
+                rows.forEach(item => {
+                    const row = tableBody.insertRow();
+                    const nameCell = row.insertCell(0);
+                    const uidCell = row.insertCell(1);
+                    const checkInCell = row.insertCell(2);
+                    const checkOutCell = row.insertCell(3);
+
+                    if (item.checkOut !== '-') {
+                        row.style.backgroundColor = '#ffd8a8';
+                    } else if (item.checkIn !== '-') {
+                        row.style.backgroundColor = '#b7efc5';
+                    } else {
+                        row.style.backgroundColor = '';
+                    }
+
+                    nameCell.textContent = item.name;
+                    uidCell.textContent = item.uid;
+                    checkInCell.textContent = item.checkIn;
+                    checkOutCell.textContent = item.checkOut;
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                attendanceFetchInProgress = false;
+            }
+        }
+
+        formatTodayLabel();
+        fetchAttendanceRecords();
+        setInterval(fetchAttendanceRecords, ATTENDANCE_REFRESH_INTERVAL_MS);
+        document.getElementById('ClearDbButton').addEventListener('click', clearDatabase);
+        
+    </script>
+</body>
+</html>
