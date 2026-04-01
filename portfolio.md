@@ -76,3 +76,15 @@ I think that without feedback things become stagnant and don't change. This migh
 If you apply this template you can be confident that your feedback is not insulting and that it is constructive. However personally I think the key takeaway from this is to not just complain about something you don't like - criticizing, but also give a suggestion on how to improve it - feedback. This is what makes a feedback constructive - you construct something, not destructive - you only destroy something. 
 
 ### 2. Feedback. Write for minimum 3 of your team members a Tip and a Top according to the BECD-method. Sit down with your team and coordinate, thus making sure that each team member will receive feedback.
+
+Nicolo:
+- tip: I noticed that sometimes you are not as present in the group as you could be. I think that if you were more present it would have a positive effect on the group and it would also make you feel more involved and connected to the group. I suggest that you try to join more meetings and be more active in the group chats.
+- top: I think you are a very calm and friendly person and I really enjoy working with you. I always feel comfortable around you and I think that this contributes to a positive group dynamic. Being easy to deal with is a great quality that you have that others will appreciate.
+  
+Aria
+- tip: I noticed that you are often in a hurry and constantly jumping to other things. I think that this can sometimes make it difficult for you to focus on the task at hand and it can also backfire sometimes and make you forget about something important. I suggest that you try to slow down a bit and focus on one thing at a time, this will help you to be more effective and it will also reduce the chances of making mistakes.
+- top: I noticed that you are reliable and you always do your part of the work and are not afraid to take on a challenge. I think that this is a great quality to have and helps the group a lot. .Continuing this will make people appreciate you in the future.
+
+Radu:
+- tip: I noticed that you do not always share your ideas with the group. This can make it harder for the team to benefit from your perspective and may slow down discussion. I suggest that you speak up more often when we are discussing tasks so your ideas can help the group make better decisions.
+- top: I noticed that you always ask good questions and you are not afraid to speak up when you are uncertain about something. This makes sure that we are all on the same page and it also helps to clarify things for everyone. This is a good habit to have and it contributes to a positive group dynamic. Keep asking good questions and don't be afraid to speak up, this will help you and the group a lot in the future.
