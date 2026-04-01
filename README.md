@@ -6,12 +6,6 @@ This repository aggregates multiple project repositories using Git subtrees.
 - Student ID: 5486866
 - Main repository: https://github.com/pop9459/P3-Portfolio
 
-## Included Projects
-
-- `P3-ComputerScience`
-- `P3-EmbeddedSystems`
-- `AutomaticCourtainBlinder`
-
 ## Quick Links
 
 - [Computer Science Portfolio](P3-ComputerScience/portfolio.md)
@@ -45,3 +39,42 @@ python combine_portfolios.py
 git add .
 git commit -m "Update subprojects and regenerate portfolio"
 ```
+
+## Adding New Subproject Repositories
+
+To add a new project repository as a subtree:
+
+### 1. Add the new subtree
+
+Replace `PROJECT_NAME`, `GITHUB_URL`, and `BRANCH` with your values:
+
+```bash
+git subtree add --prefix PROJECT_NAME GITHUB_URL BRANCH --squash
+```
+
+**Example:**
+```bash
+git subtree add --prefix MyNewProject https://github.com/username/my-new-project main --squash
+```
+
+### 2. Update "Included Projects" section
+
+Add the new project folder name to the list in the "Included Projects" section at the top of this README.
+
+### 3. Update pull command
+
+Add a new line to the `git subtree pull` command in section "1. Pull all subprojects":
+
+```bash
+git subtree pull --prefix PROJECT_NAME GITHUB_URL BRANCH --squash && \
+```
+
+### 4. Regenerate and commit
+
+```bash
+python combine_portfolios.py
+git add .
+git commit -m "Add PROJECT_NAME as subtree"
+```
+
+The script will automatically detect and merge the new project's portfolio file (if it exists) into `PORTFOLIO.md`.
