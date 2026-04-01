@@ -22,7 +22,8 @@ Run these commands from the root of this repository.
 ```bash
 git subtree pull --prefix P3-ComputerScience https://github.com/pop9459/P3-ComputerScience main --squash && \
 git subtree pull --prefix P3-EmbeddedSystems https://github.com/pop9459/P3-EmbeddedSystems main --squash && \
-git subtree pull --prefix AutomaticCourtainBlinder https://github.com/pop9459/AutomaticCourtainBlinder main --squash
+git subtree pull --prefix AutomaticCourtainBlinder https://github.com/pop9459/AutomaticCourtainBlinder main --squash && \
+git subtree pull --prefix P3-ProfessionalSkills https://github.com/pop9459/P3-ProfessionalSkills main --squash 
 ```
 
 ### 2. Regenerate Combined Portfolio
