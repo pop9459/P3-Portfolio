@@ -1,0 +1,8 @@
+# Image files
+*.jpg
+*.jpeg
+*.png
+
+# Keep the shirt template image
+!shirt.png
+!test_image.png
