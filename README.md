@@ -39,7 +39,11 @@ python combine_portfolios.py
 ```bash
 git add .
 git commit -m "Update subprojects and regenerate portfolio"
+git push
 ```
+
+### 4. Generate PDF (optional)
+To generate a PDF version of the combined portfolio, you can use this Visual Studio Code extension: [Markdown PDF](https://marketplace.visualstudio.com/items?itemName=yzane.markdown-pdf)
 
 ## Adding New Subproject Repositories
 
